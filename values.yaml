@@ -1,0 +1,72 @@
+# Overrides for the name and fullname of the chart
+nameOverride: ""
+fullnameOverride: ""
+
+# The docker image to pull from.
+image:
+  repository: farmdawgnation/ghost-docker
+  tag: "2.2.4"
+  pullPolicy: IfNotPresent
+
+contentVolume:
+  usePvc: true
+  pvc:
+    storage: 5Gi
+    storageClassName: do-block-storage
+
+# Configuration of the deployment
+deployment:
+  replicaCount: 1
+  strategy:
+    type: Recreate
+  resources: {}
+    # example ----
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  secrets:
+    # Secrets to use for the database password and
+    # mail password. This should be the name of a
+    # pre-defined, external secret. The database secret
+    # will expect a key named DATABAE_PASSWORD and the
+    # mail secret will expect a key named MAIL_PASSWORD.
+    # They may be the same secret.
+    databasePasswordSecret: null
+    mailPasswordSecret: null
+
+# The hostname to use on the ingress that gets declared.
+ingress:
+  host: ghost.mydomain.com
+
+# Ghost configuration. The contents of this block are translated
+# into JSON and provided as the ghost configuration.
+ghost: {}
+  # # If your ingress controller supports Let's Encrypt you can
+  # # set this to https and it'll just work
+  # url: http://ghost.mydomain.com
+  # server:
+  #   host: "0.0.0.0"
+  # database:
+  #   client: mysql
+  #   connection:
+  #     host: mysql.default.svc.cluster.local
+  #     port: "3306"
+  #     user: "ghost"
+  #     database: "ghost"
+  #
+  #     We recommend populating this from the secret but you
+  #     can use the helm config if you like
+  #     password: "ghost"
+  #
+  # mail:
+  #   transport: "SMTP"
+  #   options:
+  #    service: "Mailgun"
+  #    user: "postmaster@my.domain.com"
+  #
+  #   We recommend populating this from the mail secret
+  #   but you can drop it here in your config if you like.
+  #    password: mypassword

@@ -1,0 +1,13 @@
+{{ if .Values.contentVolume.usePvc }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "ghost.fullname" . }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.contentVolume.pvc.storage }}
+  storageClassName: {{ .Values.contentVolume.pvc.storageClassName }}
+{{ end }}
