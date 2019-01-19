@@ -1,0 +1,5 @@
+Your Ghost deployment has been completed. You should be able to visit
+it at {{ .Values.ingress.host }} provided your ingress controller is properly
+configured.
+
+Happy writing!
