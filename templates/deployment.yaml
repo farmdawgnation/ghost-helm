@@ -55,6 +55,38 @@ spec:
           volumeMounts:
             - name: content-folder
               mountPath: /data
+        - name: init-database
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Database
+            - name: NODE_ENV
+              value: production
+            {{ if .Values.mysqlca }}
+            - name: NODE_EXTRA_CA_CERTS
+              value: /opt/ghost/mysqlca.crt
+            {{ end }}
+            {{- if .Values.deployment.secrets.databasePasswordSecret }}
+            - name: database__connection__password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.deployment.secrets.databasePasswordSecret }}
+                  key: DATABASE_PASSWORD
+            {{- end }}
+          args:
+            - "node_modules/.bin/knex-migrator"
+            - "init"
+          volumeMounts:
+            - name: content-folder
+              mountPath: /opt/ghost/content
+            - name: config-folder
+              mountPath: /opt/ghost/config.production.json
+              subPath: config.production.json
+            {{ if .Values.mysqlca }}
+            - name: config-folder
+              mountPath: /opt/ghost/mysqlca.crt
+              subPath: mysqlca.crt
+            {{ end }}
         - name: migrate-database
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
