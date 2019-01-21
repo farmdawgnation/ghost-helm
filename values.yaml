@@ -2,6 +2,8 @@
 nameOverride: ""
 fullnameOverride: ""
 
+mysqlca: null
+
 # The docker image to pull from.
 image:
   repository: farmdawgnation/ghost-docker

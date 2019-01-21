@@ -5,3 +5,6 @@ metadata:
   name: {{ include "ghost.fullname" . }}
 data:
   config.production.json: {{ toJson .Values.ghost | quote }}
+  {{ if .Values.mysqlca -}}
+  mysqlca.crt: {{ toYaml .Values.mysqlca | nindent 2 | trim }}
+  {{- end -}}
