@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "2.11.1"
 description: A Ghost deployment in Helm
 name: ghost-helm
-version: 0.1.0
+version: 0.1.1
