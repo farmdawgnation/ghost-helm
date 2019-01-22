@@ -13,6 +13,7 @@ image:
 contentVolume:
   usePvc: true
   pvc:
+    accessMode: ReadWriteOnce
     storage: 5Gi
     storageClassName: do-block-storage
 

@@ -5,7 +5,7 @@ metadata:
   name: {{ include "ghost.fullname" . }}
 spec:
   accessModes:
-  - ReadWriteOnce
+  - {{ .Values.contentVolume.pvc.accessMode }}
   resources:
     requests:
       storage: {{ .Values.contentVolume.pvc.storage }}
