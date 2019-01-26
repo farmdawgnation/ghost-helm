@@ -142,7 +142,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.deployment.secrets.databasePasswordSecret }}
-                  key: DATABASE_PASSWORD
+                  key: MAIL_PASSWORD
             {{- end }}
           args:
             - "npm"
