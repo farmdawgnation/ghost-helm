@@ -144,6 +144,9 @@ spec:
                   name: {{ .Values.deployment.secrets.databasePasswordSecret }}
                   key: MAIL_PASSWORD
             {{- end }}
+            {{ if .Values.deployment.extraEnv }}
+              {{- toYaml .Values.deployment.extraEnv | nindent 12 }}
+            {{ end }}
           args:
             - "npm"
             - "start"

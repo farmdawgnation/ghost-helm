@@ -39,6 +39,7 @@ deployment:
     # They may be the same secret.
     databasePasswordSecret: null
     mailPasswordSecret: null
+  extraEnv: null
 
 # The hostname to use on the ingress that gets declared.
 ingress:
