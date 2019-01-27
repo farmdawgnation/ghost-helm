@@ -10,10 +10,12 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   rules:
-    - host: {{ .Values.ingress.host }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ $fullName }}
               servicePort: 2368
+    {{- end }}
