@@ -138,10 +138,10 @@ spec:
                   key: DATABASE_PASSWORD
             {{- end }}
             {{- if .Values.deployment.secrets.mailPasswordSecret }}
-            - name: mail__options__password
+            - name: mail__options__auth__pass
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.deployment.secrets.databasePasswordSecret }}
+                  name: {{ .Values.deployment.secrets.mailPasswordSecret }}
                   key: MAIL_PASSWORD
             {{- end }}
             {{ if .Values.deployment.extraEnv }}
