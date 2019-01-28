@@ -147,9 +147,6 @@ spec:
             {{ if .Values.deployment.extraEnv }}
               {{- toYaml .Values.deployment.extraEnv | nindent 12 }}
             {{ end }}
-          args:
-            - "npm"
-            - "start"
           volumeMounts:
             - name: content-folder
               mountPath: /opt/ghost/content
