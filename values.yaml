@@ -7,7 +7,7 @@ mysqlca: null
 # The docker image to pull from.
 image:
   repository: farmdawgnation/ghost-docker
-  tag: "2.12.0"
+  tag: "2.13.1"
   pullPolicy: IfNotPresent
 
 contentVolume:
